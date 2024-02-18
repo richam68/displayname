@@ -19,10 +19,10 @@ function App() {
     e.preventDefault();
     console.log("button", formData);
 
-    setFormData({
-      firstName: "",
-      lastName: "",
-    });
+    // setFormData({
+    //   firstName: "",
+    //   lastName: "",
+    // });
   };
 
   return (
