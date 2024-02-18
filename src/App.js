@@ -1,5 +1,5 @@
-import {useState} from "react"
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -8,7 +8,10 @@ function App() {
   });
 
   const handleChange = (e) => {
-    const [key, value] = [e.target.name, e.target.value];
+    const [key, value] = [
+      e.target.name,
+      e.target.value.replace(/[^a-zA-Z0-9_@.!/#&+-]/g, ""),
+    ];
     setFormData((prev) => ({
       ...prev,
       [key]: value,
@@ -18,11 +21,11 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("button", formData);
-
-    // setFormData({
-    //   firstName: "",
-    //   lastName: "",
-    // });
+    const concatenatedName = `${formData.firstName} ${formData.lastName}`;
+    setFormData({
+      ...formData,
+      concatenatedName: concatenatedName,
+    });
   };
 
   return (
@@ -56,7 +59,9 @@ function App() {
         <br />
         <button type="submit">Submit</button>
 
-        <p>Full Name: {formData.firstName} {formData.lastName}</p>
+        <p>
+          Full Name: {formData.firstName} {formData.lastName}
+        </p>
       </form>
     </div>
   );
