@@ -1,50 +1,26 @@
-import {useState} from "react"
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
- const [firstName, setFirstName] = useState('');
- const [lastName, setLastName] = useState('')
- const [fullName, setFullName] = useState('')
+  let [valueOfCount, setValueOfCount] = useState(0);
 
- const handleSubmit = (e) => {
-  e.preventDefault();
-  const concatenatedName = `${firstName} ${lastName}`
-  setFullName(concatenatedName);
- }
+  function handleIncrement(e, data) {
+    valueOfCount += data;
+    setValueOfCount(valueOfCount);
+  }
+
+  function handleDecrement(e, data) {
+    valueOfCount -= data;
+    setValueOfCount(valueOfCount);
+  }
 
   return (
     <div>
-      <h1>Full Name Display</h1>
-      <form onSubmit= {handleSubmit}>
-        <label htmlFor="firstName">
-          First Name:
-          <input
-            id="firstName"
-            type="text"
-            required
-            name="firstName"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value.replace(/[^a-zA-Z0-9_@.!/#&+-]/g, ""))}
-          />
-        </label>
-        <br />
-        <label htmlFor="lastName">
-          Last Name:
-          <input
-            id="lastName"
-            type="text"
-            required
-            name="lastName"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value.replace(/[^a-zA-Z0-9_@.!/#&+-]/g, ""))}
-          />
-        </label>
-        <br />
-        <br />
-        <button type="submit">Submit</button>
+      <h1>Counter App</h1>
+      <p>Count: {valueOfCount}</p>
 
-      </form>
-       {fullName && <p>Full Name: {fullName}</p>}
+      <button onClick={(e) => handleIncrement(e, 1)}>Increment</button>
+      <button onClick={(e) => handleDecrement(e, 1)}>Decrement</button>
     </div>
   );
 }
