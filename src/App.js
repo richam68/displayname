@@ -4,15 +4,12 @@ import './App.css';
 function App() {
  const [firstName, setFirstName] = useState('');
  const [lastName, setLastName] = useState('')
- const [formData, setFormData] = useState({})
+ const [fullName, setFullName] = useState('')
 
  const handleSubmit = (e) => {
   e.preventDefault();
-  let obj={
-    firstName: firstName,
-    lastName: lastName
-  };
-  setFormData(obj);
+  const concatenatedName = `${firstName} ${lastName}`
+  setFullName(concatenatedName);
  }
 
   return (
@@ -46,8 +43,8 @@ function App() {
         <br />
         <button type="submit">Submit</button>
 
-        <p>Full Name: {formData.firstName} {formData.lastName}</p>
       </form>
+       {fullName && <p>Full Name: {fullName}</p>}
     </div>
   );
 }
