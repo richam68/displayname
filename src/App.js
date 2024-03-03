@@ -2,33 +2,23 @@ import {useState} from "react"
 import './App.css';
 
 function App() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-  });
+ const [firstName, setFirstName] = useState('');
+ const [lastName, setLastName] = useState('')
+ const [formData, setFormData] = useState({})
 
-  const handleChange = (e) => {
-    const [key, value] = [e.target.name, e.target.value.replace(/[^a-zA-Z0-9_@.!/#&+-]/g, "")];
-    setFormData((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+ const handleSubmit = (e) => {
+  e.preventDefault();
+  let obj={
+    firstName: firstName,
+    lastName: lastName
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("button", formData);
-    const concatenatedName = `${formData.firstName} ${formData.lastName}`
-    setFormData((prev) => ({
-      ...prev,
-      concatenatedName: concatenatedName
-    }));
-  };
+  setFormData(obj);
+ }
 
   return (
     <div>
       <h1>Full Name Display</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit= {handleSubmit}>
         <label htmlFor="firstName">
           First Name:
           <input
@@ -36,8 +26,8 @@ function App() {
             type="text"
             required
             name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value.replace(/[^a-zA-Z0-9_@.!/#&+-]/g, ""))}
           />
         </label>
         <br />
@@ -48,8 +38,8 @@ function App() {
             type="text"
             required
             name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value.replace(/[^a-zA-Z0-9_@.!/#&+-]/g, ""))}
           />
         </label>
         <br />
